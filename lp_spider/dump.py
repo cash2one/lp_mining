@@ -18,12 +18,13 @@ import h5py
 import numpy as np
 
 flag = sys.argv[1]
-crawled = "crawled.all.%s" % (flag)
+data_path = sys.argv[2]
+crawled = data_path + "crawled.all.%s" % (flag)
 dict_urlsign_lp = dict()
 with open(crawled, 'r') as fin:
     for line in fin:
         url_sign = line.strip()
-        output_path = '/root/daiwk_lp/lp_mining/output/'
+        output_path = data_path + '/%s/' % (flag)
         file_name = output_path + url_sign
         lp_info = b""
         with open(file_name, 'r') as file_url:
@@ -32,7 +33,7 @@ with open(crawled, 'r') as fin:
         dict_urlsign_lp[url_sign] = lp_info
 
 mode = "pickle"        
-dump_file = "urlsign_lp.%s.dump.pickle" % (flag)
+dump_file = data_path + "/urlsign_lp.dump.%s.pickle" % (flag)
 with open(dump_file, 'wb') as fout_dump:            
     pickle.dump(dict_urlsign_lp, fout_dump, -1) # latest binary protocol
 
@@ -40,7 +41,7 @@ with open(dump_file, 'rb') as fin_dump:
     data = pickle.load(fin_dump)
 
 mode = "h5py"
-hdf5_filename = "urlsign_lp.dump.%s.h5" % (flag)
+hdf5_filename = data_path + "/urlsign_lp.dump.%s.h5" % (flag)
 dump_file = h5py.File(hdf5_filename, "w")
 for k,v in dict_urlsign_lp.items():
     value = np.string_(v)

@@ -14,7 +14,8 @@ Author: root(root@baidu.com)
 import scrapy
 import hashlib
 
-input_file = "/root/daiwk_lp/lp_mining/lp_spider/all_pc_url.res"
+data_path = "/notebooks/lp_output/"
+input_file = data_path + "/all_pc_url.res"
 urls = set()
 
 with open(input_file, 'r') as fin:
@@ -31,7 +32,7 @@ class PcSpider(scrapy.spiders.Spider):
     start_urls = list(urls)
 
     def parse(self, response):
-        output_path = '/root/daiwk_lp/lp_mining/output/pc/'
+        output_path = data_path + '/pc/'
         #filename = output_path + response.url.split("/")[-2]
         hash_str = hashlib.md5() ## can't use global varibale....
         hash_str.update(str(response.url))

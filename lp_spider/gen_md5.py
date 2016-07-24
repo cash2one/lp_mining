@@ -16,8 +16,9 @@ import hashlib
 
 
 flag = sys.argv[1]
-input_file = "/root/daiwk_lp/lp_mining/lp_spider/all_%s_url" % (flag)
-output_file = "/root/daiwk_lp/lp_mining/lp_spider/all_%s_url.res" % (flag)
+data_path = sys.argv[2]
+input_file = data_path + "/all_%s_url" % (flag)
+output_file = data_path + "/all_%s_url.res" % (flag)
 
 with open(input_file, 'r') as fin, \
          open(output_file, 'w') as fout:
