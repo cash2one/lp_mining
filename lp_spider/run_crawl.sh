@@ -40,7 +40,7 @@ function dump()
 function main()
 {
     prepare $flag
-#    crawl $flag
-#    dump $flag
+    crawl $flag
+    dump $flag
 }
 main 2>&1
