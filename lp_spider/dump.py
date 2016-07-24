@@ -11,12 +11,14 @@ File: dump.py
 Author: root(root@baidu.com)
 Date: 2016/07/24 23:14:52
 """
+import sys
 import pickle
 
 import h5py
 import numpy as np
 
-crawled = "crawled.all"
+flag = sys.argv[1]
+crawled = "crawled.all.%s" % (flag)
 dict_urlsign_lp = dict()
 with open(crawled, 'r') as fin:
     for line in fin:
@@ -30,7 +32,7 @@ with open(crawled, 'r') as fin:
         dict_urlsign_lp[url_sign] = lp_info
 
 mode = "pickle"        
-dump_file = "urlsign_lp.dump.pickle"
+dump_file = "urlsign_lp.%s.dump.pickle" % (flag)
 with open(dump_file, 'wb') as fout_dump:            
     pickle.dump(dict_urlsign_lp, fout_dump, -1) # latest binary protocol
 
@@ -38,13 +40,14 @@ with open(dump_file, 'rb') as fin_dump:
     data = pickle.load(fin_dump)
 
 mode = "h5py"
-dump_file = h5py.File("urlsign_lp.dump.hdf5", "w")
+hdf5_filename = "urlsign_lp.dump.%s.h5" % (flag)
+dump_file = h5py.File(hdf5_filename, "w")
 for k,v in dict_urlsign_lp.items():
     value = np.string_(v)
     dump_file.create_dataset(k, data=value)
 dump_file.close()
 
-dump_file = h5py.File("urlsign_lp.dump.hdf5", "r")
+dump_file = h5py.File(hdf5_filename, "r")
 #urlsign_lp = dump_file["urlsign_lp"]
 dump_file.close()
 
