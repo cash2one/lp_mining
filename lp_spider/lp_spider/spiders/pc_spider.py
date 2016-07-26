@@ -38,6 +38,5 @@ class PcSpider(scrapy.spiders.Spider):
         hash_str.update(str(response.url))
         filename = output_path + hash_str.hexdigest()
         with open(filename, 'wb') as f:
-            f.write(response.url+'\n')
             f.write(response.body)
 

@@ -1,0 +1,5 @@
++ /usr/bin/python gen_word2vec.py
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.324 seconds.
+Prefix dict has been built succesfully.
