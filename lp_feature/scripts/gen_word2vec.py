@@ -24,8 +24,8 @@ import jieba.analyse
 ##jieba.analyse.set_stop_words(stop_words_file)
 ##jieba.load_userdict(user_dict_file)
 
-jieba.enable_parallel(4)
-file_doc = '/notebooks/wise_title_desc_bigflow.all.0724'
+jieba.enable_parallel(20)
+file_doc = '/notebooks/wise_title_desc_bigflow.all.0724.head'
 sentences = []
 with open(file_doc, 'rb') as fin:
     for line in fin:
